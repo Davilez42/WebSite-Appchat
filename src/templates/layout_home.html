@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/bootstrap.min.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/default.css')}}"
+    />
+
+    <title>Home</title>
+  </head>
+  <body>
+    <div class="bg-dark">
+      <header
+        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
+      >
+       <h2 id="titulo">Appchat</h2>
+        
+
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="/" class="nav-link px-2 link-secondary">Home</a></li>
+          <li><a href="/about" class="nav-link px-2">About</a></li>
+        </ul>
+
+        <div class="col-md-3 text-end">
+          <a
+            href="/login_session"
+            type="button"
+            class="btn btn-primary me-2"
+            >Iniciar</a
+          >
+          <a href="/registro" type="button" class="btn btn-primary">Registrar</a>
+        </div>
+      </header>
+    </div>
+
+  {% block content %} 
+  {% endblock %}
+
+    <footer class="container mt-auto text-white-50">
+      <p>
+       Desarroyado por David Suarez..
+        
+      </p>
+    </footer>
+  </body>
+</html>

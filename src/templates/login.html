@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css')}}">
+        <title>Document</title>
+</head>
+<body class="text-center">
+    
+    <main id="contenedor" class="container form-signin w-100 m-auto">
+      <form class="form" action="{{url_for('verificar_login')}}" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for ms in messages %}
+
+        <div class="alert alert-primary alert-dismissible" role="alert">
+          <strong>
+            {{ ms }}
+          </strong>
+        <button type="button" class="btn-close" data-bs-dimiss="alert" aria-label="Close"></button>
+        </div>
+
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <h1 class="h3 mb-3 fw-normal ">Iniciar Sesion</h1>
+    
+        <div class="form-floating mb-3">
+          <input name="user" type="text" class="form-control" id="floatingInput" placeholder="name">
+          <label for="floatingInput">usuario</label>
+        </div>
+
+        <div class="form-floating">
+          <input name="pass" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+          <label for="floatingPassword">Password</label>
+        </div>
+    
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="w-50 btn btn-lg btn-primary" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-muted">© 2017–2022</p>
+      </form>
+    </main> 
+    </body>
+</html>

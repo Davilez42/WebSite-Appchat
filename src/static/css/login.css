@@ -1,0 +1,45 @@
+h1 {
+
+
+    border-radius: 20px;
+    display: inline-block;
+    width: 200px;
+    height: 40px;
+
+    background: #74ebd5;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #ACB6E5, #74ebd5);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ACB6E5, #74ebd5);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+}
+
+body {
+    background: #c31432;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #240b36, #c31432);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #240b36, #c31432);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+#contenedor {
+
+    padding-left: 30%;
+    padding-top: 10%;
+}
+
+.form {
+
+    width: 50%;
+    height: 60%;
+
+
+}
+.form-floating{
+    margin: 30px;
+   
+}
