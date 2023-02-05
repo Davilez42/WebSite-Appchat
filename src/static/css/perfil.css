@@ -22,4 +22,28 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
 } 
 .titulo{
   color: aliceblue;
-} 
+}
+
+.principal{
+  display: block;
+}
+
+#contenedor1{
+  margin-top: 20px;
+  margin-left: 20px;
+  height: 300px;
+  width: 45%;
+  overflow: auto;
+}
+#contenedor2{
+  margin-top: 10px;
+  margin-left: 20px;
+  height: 300px;
+  width: 60%;
+
+}
+
+#contenedor2 form input ,label{
+  margin-left: 20px;
+}
+

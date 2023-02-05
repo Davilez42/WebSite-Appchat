@@ -1,44 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/css/perfil.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../static/css/perfil.css" />
     <title>Document</title>
-</head>
-<body>
-   
-    <h1 class="titulo">Bienvenido {{ current_user.username }}    </h1>
-    <h2 class="titulo">Email:  {{ current_user.email}}</h2>
-    <a href="{{ url_for('vaciar_bandeja') }}">Vaciar Bandeja Mensajes</a>
-    <div class="container-fluid pb-3">
-        <div class="d-grid gap-3" style="grid-template-columns: 1fr 2fr;">
-          <div class="bg-light border rounded-3">
-            <h1>Mensajes</h1>
-            <ul>
-              {% for m in current_user.messages %}
+  </head>
+  <body>
+    <h1 class="titulo">Bienvenido <b>{{ current_user.username }}</b>     Email: {{ current_user.email}}</h1>
+    <a class="btn btn-primary" href="{{ url_for('vaciar_bandeja') }}">Vaciar Bandeja Mensajes</a>
+    <a class="btn btn-primary" href="{{ url_for('logout') }}">Salir</a>
+    <a class="btn btn-danger btn-primary" href="{{ url_for('eliminar_cuenta') }}">Eliminar Cuenta</a>
 
-              <li>
-               {{m.date}}<br>{{m.id_remi}} : {{ m.message }} 
-              </li>
-
-              {% endfor %}
-            </ul>
-            
-          </div>
-          <div class="bg-light border rounded-3">
-            <input type="text">
-            <input type="text" name="" id="">
-          </div>
+    <div class="container-fluid pb-3" id="principal">
+      <div  style="grid-template-columns: 1fr 2fr">
+        <div class="bg-light border rounded-3" id="contenedor1">
+          <h1>Mensajes</h1>
+          <ul>
+            {% for m in current_user.messages %}
+            <hr>
+            <li>{{m.date}}<br> <b>{{m.id_remi}}</b> : {{ m.message }}</li>
+            <hr>
+            {% endfor %}
+          </ul>
         </div>
-      </div>
 
+        <div class="" style="grid-template-columns: 1fr 2fr">
+          <div class="bg-light border rounded-3" id="contenedor2">
+            <form action="" >
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label"
+                  >username destination</label
+                >
+                <input
+                  type="email"
+                  class="form-control w-50"
+                  id="exampleFormControlInput1"
+                  placeholder="@username"
+                />
+              </div>
+              <div class="mb-3" class="contenedor-mensajes">
+                <label for="exampleFormControlTextarea1" class="form-label"
+                  >Message</label
+                >
+                <textarea
+                  class="form-control"
+                  id="exampleFormControlTextarea1"
+                  rows="2" 
+                ></textarea>
+              </div>
+                  <button class="btn btn-primary" type="submit">Enviar Mensaje</button>
+            </form>
+          </div>
 
-    <a href="{{ url_for('logout') }}">Salir</a>
-    <a href="{{ url_for('eliminar_cuenta') }}">Eliminar Cuenta</a>
+       
+        
+    </div>
    
-    <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-</body>
+
+  </div>
+
+  
+
+    <script
+      src="/docs/5.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
+
+
