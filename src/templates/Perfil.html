@@ -10,14 +10,22 @@
 </head>
 <body>
    
-    <h1 class="titulo">Bienvenido {{ current_user.fullname  }}    </h1>
+    <h1 class="titulo">Bienvenido {{ current_user.username }}    </h1>
     <h2 class="titulo">Email:  {{ current_user.email}}</h2>
-    
+    <a href="{{ url_for('vaciar_bandeja') }}">Vaciar Bandeja Mensajes</a>
     <div class="container-fluid pb-3">
         <div class="d-grid gap-3" style="grid-template-columns: 1fr 2fr;">
           <div class="bg-light border rounded-3">
             <h1>Mensajes</h1>
-            <p>Mensajes: {{ current_user.messages }}</p>
+            <ul>
+              {% for m in current_user.messages %}
+
+              <li>
+               {{m.date}}<br>{{m.id_remi}} : {{ m.message }} 
+              </li>
+
+              {% endfor %}
+            </ul>
             
           </div>
           <div class="bg-light border rounded-3">
@@ -29,6 +37,8 @@
 
 
     <a href="{{ url_for('logout') }}">Salir</a>
+    <a href="{{ url_for('eliminar_cuenta') }}">Eliminar Cuenta</a>
+   
     <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>

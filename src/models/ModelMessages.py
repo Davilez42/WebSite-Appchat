@@ -1,4 +1,4 @@
-
+from .Entities.Message import Message
 
 class ModelMessages():
     
@@ -8,7 +8,7 @@ class ModelMessages():
         try:
             cursor =  db.connection.cursor()
             sql = f"""
-            select id_message,id_remi,message 
+            select id_message,id_remi,message,date_release 
             from messages m 
             where  id_dest  = {id};
             """
@@ -16,8 +16,10 @@ class ModelMessages():
             rows =  cursor.fetchall()
             
             if rows != None:
-                
-                return {x:[self.getName(db,y),z] for x,y,z in list(rows)}
+                mensajes = []
+                for m in rows:
+                    mensajes.append(Message(m[0],None,self.getName(db,m[1]),m[2],m[3],None))
+                return mensajes
             else:
                 return None
         except Exception as ex:
@@ -35,7 +37,24 @@ class ModelMessages():
             if row !=None:
                 return  row[1]            
             else:
-                return  None    
+                return  'Cuenta eliminada'   
                         
         except Exception as ex:
             raise Exception(ex) 
+        
+        
+    @classmethod
+    def clear_messages(self,db,id_dest):
+        try:
+            cursor = db.connection.cursor()
+            sql = f"""DELETE from messages WHERE id_dest = {id_dest} """
+            cursor.execute(sql)#Ejecto la consulta
+            db.connection.commit()                     
+        except Exception as ex:
+            raise Exception(ex)
+    
+    
+    @classmethod
+    def insert_message(db,id_dest,id_remi):
+        pass
+                    
