@@ -11,24 +11,26 @@
 <body class="text-center">
     
     <main id="contenedor" class="container form-signin w-100 m-auto">
+      
       <form class="form" action="{{url_for('verificar_login')}}" method="post">
+        
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        
+        <h1 class="h3 mb-3 fw-normal ">Iniciar Sesion</h1>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
         {% for ms in messages %}
 
-        <div class="alert alert-primary alert-dismissible" role="alert">
+        <div id="alert" class="alert alert-primary alert-dismissible" role="alert">
           <strong>
             {{ ms }}
           </strong>
-        <button type="button" class="btn-close" data-bs-dimiss="alert" aria-label="Close"></button>
+        <button  type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 
         {% endfor %}
         {% endif %}
         {% endwith %}
-        <h1 class="h3 mb-3 fw-normal ">Iniciar Sesion</h1>
-    
         <div class="form-floating mb-3">
           <input name="user" type="text" class="form-control" id="floatingInput" placeholder="name">
           <label for="floatingInput">usuario</label>
@@ -48,5 +50,6 @@
         <p class="mt-5 mb-3 text-muted">© 2017–2022</p>
       </form>
     </main> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </body>
 </html>

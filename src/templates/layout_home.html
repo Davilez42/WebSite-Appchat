@@ -18,36 +18,33 @@
   <body>
     <div class="bg-dark">
       <header
-        class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
+        class="d-flex flex-wrap align-items-center justify-content-start justify-content-md-between py-3  border-bottom"
       >
-       <h2 id="titulo">Appchat</h2>
-        
+        <h2 id="titulo">Appchat</h2>
 
-        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <ul class="nav col-12 col-md-auto mb-1 justify-contentmb-md-1">
           <li><a href="/" class="nav-link px-2 link-secondary">Home</a></li>
           <li><a href="/about" class="nav-link px-2">About</a></li>
         </ul>
-
-        <div class="col-md-3 text-end">
-          <a
-            href="/login_session"
-            type="button"
-            class="btn btn-primary me-2"
-            >Iniciar</a
-          >
-          <a href="/registro" type="button" class="btn btn-primary">Registrar</a>
-        </div>
+      <span>
+          <form action="{{url_for('verificar_login')}}" method="post" class="form-login">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="text" name="user" class="form-control-sm" id="floatingInput" placeholder="Usuario" />
+          <input type="password" name="pass" class="form-control-sm" id="floatingInput" placeholder="Contraseña" />
+          
+          <button type="submit" class="btn btn-primary">Iniciar</button>
+        </form>
+      </span>
+      
+      
       </header>
     </div>
 
-  {% block content %} 
-  {% endblock %}
+    {% block content %} {% endblock %}
 
     <footer class="container mt-auto text-white-50">
-      <p>
-       Desarroyado por David Suarez..
-        
-      </p>
+      <p>Desarroyado por David Suarez..</p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>
 </html>

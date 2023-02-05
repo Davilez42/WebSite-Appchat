@@ -4,14 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/perfil.css">
     <title>Document</title>
 </head>
 <body>
-    <h1>Bienvenido {{ current_user.fullname }}</h1>
-    <p>Mensajes: {{ current_user.messages }}</p>
+   
+    <h1 class="titulo">Bienvenido {{ current_user.fullname  }}    </h1>
+    <h2 class="titulo">Email:  {{ current_user.email}}</h2>
+    
+    <div class="container-fluid pb-3">
+        <div class="d-grid gap-3" style="grid-template-columns: 1fr 2fr;">
+          <div class="bg-light border rounded-3">
+            <h1>Mensajes</h1>
+            <p>Mensajes: {{ current_user.messages }}</p>
+            
+          </div>
+          <div class="bg-light border rounded-3">
+            <input type="text">
+            <input type="text" name="" id="">
+          </div>
+        </div>
+      </div>
 
 
     <a href="{{ url_for('logout') }}">Salir</a>
-    
+    <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>

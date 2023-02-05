@@ -20,3 +20,50 @@ footer{
 .px-3{
     color: aliceblue;
 }
+
+#form-conten{
+background-color:#12c2e9;
+border-radius: 10px;
+position: absolute;
+left: 20%;
+}
+#form-content,form {
+    position: absolute;
+    display: inline-block;
+    position: relative;
+    width: 400px;
+    height: 460px;
+}
+#form-content,h4{
+    text-align: center;
+}
+#form-content,#ButtonRegister{
+    position: absolute;
+    top: 410px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.info-content{
+    margin-bottom: 80px;
+}
+
+.form-login{
+    position: relative;
+
+    margin-left: 0;
+    width: 500px;
+    height: 40px;
+}
+.form-login button{
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    left: 380px;
+   
+    
+}
+
+
+

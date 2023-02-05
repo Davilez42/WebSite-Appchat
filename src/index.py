@@ -34,17 +34,16 @@ def about():
 def login():
     return render_template('login.html')
 
-@app.route('/registro')
-def registro():
-    return render_template('registro.html')
+
 
 @app.route("/verificar",methods=['POST'])
 def verificar_login():
-    user =User(0,request.form['user'],None,request.form['pass'],None)
+    user =User(0,request.form['user'],None,request.form['pass'],None,None)
     logged_user = ModelUser.login(db,user)
     if logged_user!=None:
         if logged_user.password:
             login_user(logged_user)
+            
             return redirect(url_for('Perfil'))
         else:
             flash('el password es incorrecto')
@@ -54,6 +53,40 @@ def verificar_login():
         flash('usuario no valido')
         return render_template('login.html')
         
+@app.route('/registrar',methods=['POST'])
+def registrar():
+    username = request.form['username']
+    fullname = f"{request.form['first_name']} {request.form['last_name']}"
+    password = request.form['password']
+    email = request.form['email']
+    if username!="" and fullname!="" and password!="" and email!= "":   
+        user = User(None,username,
+                    fullname,
+                    password,
+                    email,
+                    None
+                    )
+        validacion = ModelUser.insert_user(db,user)
+        if not validacion[0]:
+            flash('Usuario en uso')
+            return render_template('home.html')
+        else:
+            if not validacion[1]:
+                flash('Email en uso')
+                return render_template('home.html')
+            else:
+                if not validacion[2]:
+                    flash('la contraseña debe tener almenos 8 caracteres')
+                    return render_template('home.html')
+                    
+        #db.commit()#guardo cambios         
+        return render_template('home.html')
+    else:
+        flash('Porfavor llene todos los campos')    
+        return render_template('home.html')
+
+
+
    
 @app.route('/Perfil')
 @login_required
