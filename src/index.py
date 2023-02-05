@@ -1,7 +1,7 @@
 from flask import Flask,render_template,request,flash,redirect,url_for
 from config import config
 from flask_mysqldb import MySQL
-from flask_login import LoginManager,login_user,logout_user,login_required
+from flask_login import LoginManager,login_user,logout_user,login_required,current_user
 from flask_wtf.csrf import CSRFProtect
  
 #Entidades
@@ -9,7 +9,7 @@ from models.Entities.User import User
 
 #Modelos
 from models.ModelUser import ModelUser
- 
+from models.ModelMessages import ModelMessages 
 app = Flask(__name__)#obtengo un objeto  para iniciar un servitos
 db = MySQL(app)#----base de datos-----
 csrf = CSRFProtect()
@@ -91,7 +91,24 @@ def registrar():
 @app.route('/Perfil')
 @login_required
 def Perfil():
+   
     return render_template('Perfil.html')  
+
+
+@app.route('/eliminar_cuenta')
+@login_required
+def eliminar_cuenta():   
+    ModelUser.deleted_user(db,current_user.username)
+    return redirect(url_for('logout'))
+
+
+@app.route('/vaciar_bandeja')
+@login_required
+def vaciar_bandeja():
+    ModelMessages.clear_messages(db,current_user.id)
+    url_for('load_user')
+    return render_template('perfil.html')
+
 
 @app.route('/logout')
 def logout():
