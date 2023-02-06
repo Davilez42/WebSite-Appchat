@@ -3,10 +3,10 @@ from config import config
 from flask_mysqldb import MySQL
 from flask_login import LoginManager,login_user,logout_user,login_required,current_user
 from flask_wtf.csrf import CSRFProtect
- 
+from datetime import datetime as d 
 #Entidades
 from models.Entities.User import User
-
+from models.Entities.Message import Message
 #Modelos
 from models.ModelUser import ModelUser
 from models.ModelMessages import ModelMessages 
@@ -91,7 +91,6 @@ def registrar():
 @app.route('/Perfil')
 @login_required
 def Perfil():
-   
     return render_template('Perfil.html')  
 
 
@@ -105,15 +104,35 @@ def eliminar_cuenta():
 @app.route('/vaciar_bandeja')
 @login_required
 def vaciar_bandeja():
-    ModelMessages.clear_messages(db,current_user.id)
-    url_for('load_user')
-    return render_template('perfil.html')
+    ModelMessages.clear_messages(db,current_user.id) 
+    return redirect(url_for('Perfil'))
 
+
+@app.route('/enviar_mensaje',methods=['POST'])
+def enviar_mensaje():
+    fecha  = (d.today().strftime('%Y-%m-%d/%H:%M:%S.%fZ')).split('/')
+    respuesta =  ModelMessages.insert_message(db,
+                                 Message(None,
+                                         request.form['username_dest'],
+                                         current_user.id,
+                                         request.form['message'],
+                                         fecha[0],
+                                         fecha[1]
+                                         ) )
+    if respuesta:
+        return redirect(url_for('Perfil'))
+    else:
+        return 'El usuario no existe'
+
+    
+    
 
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('home'))
+ 
     
 
 #----------------ESTADOS---------------------#

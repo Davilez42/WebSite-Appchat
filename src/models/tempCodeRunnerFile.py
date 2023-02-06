@@ -1,2 +1,2 @@
-
-print(lista)
+import datetime as d
+print(d.date())

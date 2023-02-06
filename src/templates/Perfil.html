@@ -15,13 +15,13 @@
     <a class="btn btn-danger btn-primary" href="{{ url_for('eliminar_cuenta') }}">Eliminar Cuenta</a>
 
     <div class="container-fluid pb-3" id="principal">
-      <div  style="grid-template-columns: 1fr 2fr">
+      <div style="grid-template-columns: 1fr 2fr">
         <div class="bg-light border rounded-3" id="contenedor1">
           <h1>Mensajes</h1>
           <ul>
             {% for m in current_user.messages %}
             <hr>
-            <li>{{m.date}}<br> <b>{{m.id_remi}}</b> : {{ m.message }}</li>
+            <li>{{m.date}}  <br> {{m.time}} - <b>{{m.id_remi}}</b> : {{ m.message }} </li>
             <hr>
             {% endfor %}
           </ul>
@@ -29,16 +29,19 @@
 
         <div class="" style="grid-template-columns: 1fr 2fr">
           <div class="bg-light border rounded-3" id="contenedor2">
-            <form action="" >
+            <form action="{{ url_for('enviar_mensaje') }}" method="post">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
               <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label"
                   >username destination</label
                 >
                 <input
-                  type="email"
+                  type="text"
                   class="form-control w-50"
                   id="exampleFormControlInput1"
                   placeholder="@username"
+                  name="username_dest"
+                  required
                 />
               </div>
               <div class="mb-3" class="contenedor-mensajes">
@@ -49,6 +52,7 @@
                   class="form-control"
                   id="exampleFormControlTextarea1"
                   rows="2" 
+                  name="message"
                 ></textarea>
               </div>
                   <button class="btn btn-primary" type="submit">Enviar Mensaje</button>

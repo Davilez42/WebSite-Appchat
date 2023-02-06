@@ -1,3 +1,3 @@
-lista1 =  ['hola',1,2,3,4,45,56,6]
-lista1.insert(1,'jose')
-print(lista1)
+from datetime import datetime as d
+import sysconfig 
+print()
