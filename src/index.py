@@ -38,12 +38,12 @@ def login():
 
 @app.route("/verificar",methods=['POST'])#Pendiente a cambio 
 def verificar_login():
-    user =User(0,request.form['user'],None,request.form['pass'],None,None)
+    user =User(0,request.form['user'],None,request.form['pass'],None,None,None)
     logged_user = ModelUser.login(db,user)
     if logged_user!=None:
         if logged_user.password:
             login_user(logged_user)
-            
+            ModelUser.cambiar_estado_sesion(db,True,logged_user.id)
             return redirect(url_for('Perfil'))
         else:
             flash('el password es incorrecto')
@@ -115,7 +115,8 @@ def enviar_mensaje():
                                          current_user.id,
                                          request.form['message'],
                                          fecha[0],
-                                         fecha[1]
+                                         fecha[1],
+                                         None
                                          ) )
     if respuesta:
         return redirect(url_for('Perfil'))
@@ -128,6 +129,7 @@ def enviar_mensaje():
 @app.route('/logout')
 @login_required
 def logout():
+    ModelUser.cambiar_estado_sesion(db,False,current_user.id)
     logout_user()
     return redirect(url_for('home'))
  

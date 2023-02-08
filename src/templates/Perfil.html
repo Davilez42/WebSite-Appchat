@@ -21,7 +21,7 @@
           <ul>
             {% for m in current_user.messages %}
             <hr>
-            <li>{{m.date}}  <br> {{m.time}} - <b>{{m.id_remi}}</b> : {{ m.message }} </li>
+            <li>  {{m.date}}  <br> {% if m.estado_del_remitente =='True' %} <div id="estado-activo"></div> {% else %} <div id="estado-inactivo"></div> {% endif %}  {{m.time}} - <b>{{m.id_remi}}</b> : {{ m.message }} </li>
             <hr>
             {% endfor %}
           </ul>

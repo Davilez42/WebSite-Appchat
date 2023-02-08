@@ -12,13 +12,24 @@ class ModelUser():
             cursor.execute(sql)  # Ejecto la consulta
             row = cursor.fetchone()  # guardo el resultado
             if row != None:
-                return User(row[0], row[1], None, User.check_password_hash(row[2], user.password), None, None)
+                return User(row[0], row[1], None, User.check_password_hash(row[2], user.password), None, None,None)
             else:
                 return None
 
         except Exception as ex:
             raise Exception(ex)
 
+    @classmethod
+    def cambiar_estado_sesion(self,db,estado,id):
+        try:
+            cursor = db.connection.cursor()
+            sql = f""" UPDATE usuarios_p1 SET sesion = '{estado}' where id = {id} """
+            cursor.execute(sql)
+            db.connection.commit()
+            
+        except Exception as ex:
+            raise(ex)
+        
     @classmethod
     def get_by_id(self, db, id):  # CONSULTAR
         try:
@@ -29,7 +40,7 @@ class ModelUser():
             cursor.execute(sql)  # Ejecto la consulta
             row = cursor.fetchone()  # guardo el resultado
             if row != None:
-                return User(row[0], row[1], row[2], None, row[3], ModelMessages.getMessagesById(db, row[0]))
+                return User(row[0], row[1], row[2], None, row[3], ModelMessages.getMessagesById(db, row[0]),None)
             else:
                 return None
 
@@ -50,7 +61,7 @@ class ModelUser():
                 from usuarios_p1 
                 where email = '{user.email}';
             """
-            sql_insert = f""" INSERT INTO usuarios_p1 (username,fullname,password,email) VALUES (%s,%s,%s,%s); """
+            sql_insert = f""" INSERT INTO usuarios_p1 (username,fullname,password,email,sesion) VALUES (%s,%s,%s,%s,%s); """
             cursor.execute(sql_user)
             rows_username = cursor.fetchone()
 
@@ -62,7 +73,7 @@ class ModelUser():
                 else:
                     if len(user.password) >= 8:
                         cursor.execute(sql_insert, (user.username, user.fullname, User.transformPasswordToHash(
-                            user.password), user.email))  # Ejecto la consulta
+                            user.password), user.email,user.estado_del_usuario))  # Ejecto la consulta
                         db.connection.commit()
                         return (True, True, True)
                     else:

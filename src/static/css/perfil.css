@@ -47,3 +47,17 @@ background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+
   margin-left: 20px;
 }
 
+#estado-activo{
+  background-color: rgb(0, 255, 123);
+  width: 20px;
+  height: 20px;
+  border-radius: 30px;
+  display: inline-block;
+}
+#estado-inactivo{
+  background-color: rgb(234, 0, 0);
+  width: 20px;
+  height: 20px;
+  border-radius: 30px;
+  display: inline-block;
+}

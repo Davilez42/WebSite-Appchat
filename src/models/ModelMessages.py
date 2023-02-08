@@ -20,8 +20,10 @@ class ModelMessages():
             if rows != None:
                 mensajes = []
                 for m in rows:
+                    inf = self.getInfoRemitent(db, m[1])
                     mensajes.append(
-                        Message(m[0], None, self.getName(db, m[1]), m[2], m[3], m[4]))
+                        Message(m[0], None, inf[0], m[2], m[3], m[4],inf[1]))
+                    
                 return mensajes
             else:
                 return None
@@ -29,16 +31,16 @@ class ModelMessages():
             raise Exception(ex)
 
     @classmethod
-    def getName(self, db, id):
+    def getInfoRemitent(self, db, id):
         try:
             cursor = db.connection.cursor()
-            sql = f"""SELECT id,username,fullname
+            sql = f"""SELECT id,username,fullname,sesion
                         from usuarios_p1 
                         WHERE id = '{id}'"""
             cursor.execute(sql)  # Ejecto la consulta
             row = cursor.fetchone()  # guardo el resultado
             if row != None:
-                return row[1]
+                return row[1],row[3]
             else:
                 return 'Cuenta eliminada'
 
@@ -101,3 +103,4 @@ class ModelMessages():
         except Exception as ex:
             raise (ex)
         pass
+
