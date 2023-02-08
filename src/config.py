@@ -8,6 +8,7 @@ class DevelopmentConfig(Config):
     MYSQL_USER = 'root'
     MYSQL_PASSWORD = ''
     MYSQL_DB = 'appchat'
+    port = '80'
 
 
 config ={

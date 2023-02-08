@@ -36,7 +36,7 @@ def login():
 
 
 
-@app.route("/verificar",methods=['POST'])
+@app.route("/verificar",methods=['POST'])#Pendiente a cambio 
 def verificar_login():
     user =User(0,request.form['user'],None,request.form['pass'],None,None)
     logged_user = ModelUser.login(db,user)
@@ -54,7 +54,7 @@ def verificar_login():
         return render_template('login.html')
         
 @app.route('/registrar',methods=['POST'])
-def registrar():
+def registrar():#Pendiente a cambio
     username = request.form['username']
     fullname = f"{request.form['first_name']} {request.form['last_name']}"
     password = request.form['password']
@@ -77,9 +77,7 @@ def registrar():
             else:
                 if not validacion[2]:
                     flash('la contraseña debe tener almenos 8 caracteres')
-                    return render_template('home.html')
-                    
-        #db.commit()#guardo cambios         
+                    return render_template('home.html')       
         return render_template('home.html')
     else:
         flash('Porfavor llene todos los campos')    
@@ -146,4 +144,4 @@ if __name__ == '__main__':
     csrf.init_app(app)
     app.register_error_handler(401,status_401)
     app.register_error_handler(404,status_404)
-    app.run()
+    app.run(host='0.0.0.0',port=5000)

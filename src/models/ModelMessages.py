@@ -12,7 +12,7 @@ class ModelMessages():
             select id_message,id_remi,message,date_release,date_time
             from messages m 
             where id_dest  = {id} and deleted_dest = 'False'
-            order by   date_time,date_release asc;
+            order by   date_release,date_time desc;
             """
             cursor.execute(sql)
             rows = cursor.fetchall()
