@@ -87,14 +87,13 @@ class ModelUser():
             raise Exception(ex)
 
     @classmethod
-    def deleted_user(self, db, username):
+    def deleted_user(self, db, id):
         try:
             cursor = db.connection.cursor()
             sql_delete = f"""
-            DELETE FROM usuarios_p1 where username = '{username}';
+            DELETE FROM usuarios_p1 where id = '{id}';
             """
             cursor.execute(sql_delete)
-            db.connection.commit()
-
+            db.connection.commit() 
         except Exception as ex:
             raise (ex)  # genera una excepcion

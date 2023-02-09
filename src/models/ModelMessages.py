@@ -22,7 +22,7 @@ class ModelMessages():
                 for m in rows:
                     inf = self.getInfoRemitent(db, m[1])
                     mensajes.append(
-                        Message(m[0], None, inf[0], m[2], m[3], m[4],inf[1]))
+                        Message(m[0], None, inf if  inf[0]!=tuple() else inf[0], m[2], m[3], m[4],inf[1]))
                     
                 return mensajes
             else:
